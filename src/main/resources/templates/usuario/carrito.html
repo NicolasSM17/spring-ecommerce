@@ -59,7 +59,7 @@
 									<td th:text="${detaorden.precio}"></td>
 									<td th:text="${detaorden.cantidad}"></td>
 									<td th:text="${detaorden.total}"></td>
-									<td><a href="#" class="btn btn-danger">Quitar</a></td>
+									<td><a th:href="@{/delete/cart/{id} (id=${detaorden.producto.id}) }" class="btn btn-danger">Quitar</a></td>
 								</tr>
 							</tbody>
 						</table>
