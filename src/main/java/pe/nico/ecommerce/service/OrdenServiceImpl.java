@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pe.nico.ecommerce.model.Orden;
+import pe.nico.ecommerce.model.Usuario;
 import pe.nico.ecommerce.repository.IOrdenRepository;
 
 @Service
@@ -16,12 +17,12 @@ public class OrdenServiceImpl implements IOrdenService{
 	private IOrdenRepository ordenRepository;
 	
 	
+	
 	@Override
 	public Orden save(Orden orden) {
 		
 		return ordenRepository.save(orden);
 	}
-
 
 	@Override
 	public List<Orden> findAll() {
@@ -56,5 +57,11 @@ public class OrdenServiceImpl implements IOrdenService{
 		}
 		
 		return numeroConcatenado;
+	}
+
+	@Override
+	public List<Orden> findByUsuario(Usuario usuario) {
+		
+		return ordenRepository.findByUsuario(usuario);
 	}
 }

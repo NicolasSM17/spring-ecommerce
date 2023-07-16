@@ -1,5 +1,6 @@
 package pe.nico.ecommerce.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpSession;
+import pe.nico.ecommerce.model.Orden;
 import pe.nico.ecommerce.model.Usuario;
+import pe.nico.ecommerce.service.IOrdenService;
 import pe.nico.ecommerce.service.IUsuarioService;
 
 @Controller
@@ -21,6 +24,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IOrdenService ordenService;
 	
 	private final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
 	
@@ -68,6 +74,9 @@ public class UsuarioController {
 	@GetMapping("/compras")
 	public String obtenerCompras(Model model, HttpSession session) { 
 		model.addAttribute("sesion", session.getAttribute("idusuario"));
+		
+		Usuario usuario = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString())).get();
+		List<Orden> ordenes = ordenService.findByUsuario(usuario);
 		
 		return "usuario/compras";
 	}
