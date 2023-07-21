@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 import pe.nico.ecommerce.model.Orden;
 import pe.nico.ecommerce.model.Usuario;
 import pe.nico.ecommerce.service.IOrdenService;
@@ -55,10 +55,10 @@ public class UsuarioController {
 		return "usuario/login";
 	}
 	
-	@PostMapping("/acceder")
+	@GetMapping("/acceder")
 	public String acceder(Usuario usuario, HttpSession session) {
 		logger.info("Accesos: {}", usuario);
-		Optional<Usuario> user = usuarioService.findByEmail(usuario.getEmail());
+		Optional<Usuario> user = usuarioService.findById(Integer.parseInt(session.getAttribute("idusuario").toString()));
 		//logger.info("Usuario de DB: {}", user.get());
 		
 		if(user.isPresent()) {

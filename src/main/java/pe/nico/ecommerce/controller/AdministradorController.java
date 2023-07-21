@@ -52,7 +52,7 @@ public class AdministradorController {
 	@GetMapping("/ordenes")
 	public String ordenes(Model model) {
 		model.addAttribute("ordenes", ordenService.findAll());
-		return "administrador/prdenes";
+		return "administrador/ordenes";
 	}
 	
 	@GetMapping("/detalle/{id}")

@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 import pe.nico.ecommerce.model.Usuario;
 
 @Service
@@ -46,7 +46,7 @@ public class UserDetailServiceImpl implements UserDetailsService{
 			
 			return User.builder()
 					   	.username(usuario.getNombre())
-					   	.password(bCrypt.encode(usuario.getPassword()))
+					   	.password(usuario.getPassword()) 
 					   	.roles(usuario.getTipo())
 					   .build();
 		} else {
